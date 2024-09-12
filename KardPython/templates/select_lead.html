@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Select Lead</title>
+    <style>
+      /* Optional: Some basic styling for the buttons */
+      button,
+      .home-button {
+        padding: 10px 15px;
+        font-size: 16px;
+        margin-top: 10px;
+        cursor: pointer;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        background-color: #f2f2f2;
+      }
+
+      .home-button {
+        text-decoration: none;
+        display: inline-block;
+        color: black;
+        background-color: #e7e7e7;
+      }
+
+      .home-button:hover {
+        background-color: #ddd;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Select ECG Lead</h1>
+    <form method="POST">
+      <label for="lead">Choose a lead:</label>
+      <select name="lead" id="lead">
+        {% for lead in lead_names %}
+        <option value="{{ lead }}">{{ lead }}</option>
+        {% endfor %}
+      </select>
+      <button type="submit">Show Lead</button>
+    </form>
+
+    <!-- Add a button to go back to the homepage -->
+    <a href="{{ url_for('index') }}" class="home-button">Back to Homepage</a>
+  </body>
+</html>

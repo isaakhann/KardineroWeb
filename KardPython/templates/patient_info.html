@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Patient Information</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        color: #333;
+        padding: 20px;
+      }
+      .info-container {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        max-width: 600px;
+        margin: 0 auto;
+      }
+      .info-container h1 {
+        font-size: 24px;
+        margin-bottom: 20px;
+      }
+      .info-container p {
+        font-size: 18px;
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="info-container">
+      {% if error %}
+      <h1>Error</h1>
+      <p>{{ error }}</p>
+      {% else %}
+      <h1>Patient Information</h1>
+      <p>
+        <strong>Name:</strong> {{ patient_data.first_name }} {{
+        patient_data.last_name }}
+      </p>
+      <p><strong>ID:</strong> {{ patient_data.id }}</p>
+      {% endif %}
+    </div>
+  </body>
+</html>

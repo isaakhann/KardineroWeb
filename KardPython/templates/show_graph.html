@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ECG Graph</title>
+  </head>
+  <body>
+    <h1>{{ selected_lead }} Graph</h1>
+    <div>{{ plot_html | safe }}</div>
+    <a href="{{ url_for('select_lead') }}">Select another lead</a>
+  </body>
+</html>

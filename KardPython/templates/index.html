@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ECG Analyzer</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background-image: url("{{ url_for('static', filename='images/background.jpg') }}");
+        background-size: cover;
+        background-position: center;
+        color: black;
+      }
+
+      .navbar {
+        overflow: hidden;
+        background-color: rgba(0, 0, 0, 0.7);
+        padding: 14px 20px;
+      }
+
+      .navbar a {
+        float: left;
+        display: block;
+        color: #f2f2f2;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 17px;
+        cursor: pointer;
+      }
+
+      .navbar a:hover {
+        background-color: #ddd;
+        color: black;
+      }
+
+      .navbar a.active {
+        background-color: #4caf50;
+        color: white;
+      }
+
+      .content {
+        padding: 20px;
+        text-align: center;
+      }
+
+      .content h1 {
+        font-size: 4em;
+        margin-top: 20%;
+      }
+
+      input[type='file'] {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="navbar">
+      <a id="addFileBtn">Add File</a>
+      <a href="/show_patient_info">Show Info</a>
+      <a href="#" id="showLeadsBtn">Show Leads</a>
+      <a href="#" id="downloadCsvBtn">Download CSV</a>
+    </div>
+
+    <div class="content">
+      <h1>Welcome to ECG Analyzer</h1>
+      <p>Please click "Add File" to upload your .scp file.</p>
+
+      <form
+        id="uploadForm"
+        action="{{ url_for('upload_file') }}"
+        method="post"
+        enctype="multipart/form-data"
+      >
+        <input
+          type="file"
+          id="fileInput"
+          name="file"
+          accept=".scp"
+          onchange="submitForm()"
+        />
+      </form>
+
+      <div id="patientInfo" style="margin-top: 20px"></div>
+    </div>
+
+    <script>
+      let fileUploaded = false;
+
+      document
+        .getElementById('addFileBtn')
+        .addEventListener('click', function () {
+          document.getElementById('fileInput').click();
+          fileUploaded = true;
+        });
+
+      function submitForm() {
+        fileUploaded = true;
+        document.getElementById('uploadForm').submit();
+      }
+
+      // Redirect to show_patient_info page
+      document
+        .querySelector('.navbar a:nth-child(2)')
+        .addEventListener('click', function () {
+          window.location.href = '/show_patient_info';
+        });
+
+      // Show leads button functionality
+      document
+        .getElementById('showLeadsBtn')
+        .addEventListener('click', function () {
+          select_lead();
+        });
+
+      // Download CSV button functionality
+      document
+        .getElementById('downloadCsvBtn')
+        .addEventListener('click', function () {
+          downloadCSV();
+        });
+
+      function downloadCSV() {
+        window.location.href = '/download_csv';
+      }
+      function select_lead() {
+        window.location.href = '/select-lead';
+      }
+    </script>
+  </body>
+</html>
